@@ -2,7 +2,7 @@
 *
 * Progam Name: MP1. Membership Protocol.
 * 
-* Code authors: <your name here>
+* Code authors: Jigar S. Rudani
 *
 * Current file: mp2_node.h
 * About this file: Header file.
@@ -28,12 +28,12 @@ extern char *STDSTRING;
 
 typedef struct member{            
         struct address addr;            // my address
+		struct Node *memberlist;		// Membership List
         int inited;                     // boolean indicating if this member is up
-        int ingroup;                    // boolean indiciating if this member is in the group
-
+        int ingroup;                    // boolean indicating if this member is in the group
         queue inmsgq;                   // queue for incoming messages
-
         int bfailed;                    // boolean indicating if this member has failed
+	int memberCount;		// Number of Member's in Membership List
 } member;
 
 /* Message types */
@@ -52,17 +52,26 @@ typedef struct messagehdr{
 	enum Msgtypes msgtype;
 } messagehdr;
 
-
 /* Functions in mp2_node.c */
 
 /* Message processing routines. */
 STDCLLBKRET Process_joinreq STDCLLBKARGS;
 STDCLLBKRET Process_joinrep STDCLLBKARGS;
+STDCLLBKRET Process_receivegossip STDCLLBKARGS;
 
 /*
 int recv_callback(void *env, char *data, int size);
 int init_thisnode(member *thisnode, address *joinaddr);
 */
+
+/* Member's Data Structure
+*/
+typedef struct Node {
+	address addr;		// Address of the node
+	int heartbeatcounter;	// Heartbeat counter updated by node itself
+	int localtime;		// Corresponds to currenttime at the particular node
+	int suspect;		// Indicates Timeout (Tfail) occurs and mark this Node as Suspect Node
+}memberdata;
 
 /*
 Other routines.

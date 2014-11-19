@@ -56,8 +56,7 @@ int ENp2psend(struct address *myaddr, struct address *toaddr, char *data, int si
 
 	int sendmsg = rand() % 100;
 
-	if(emulnet.currbuffsize>=ENBUFFSIZE || size+ (int) sizeof(en_msg)>=MAX_MSG_SIZE || (dropmsg && sendmsg < (int) (MSG_DROP_PROB * 100)))
-			return 0;
+	if(emulnet.currbuffsize>=ENBUFFSIZE || size+ (int) sizeof(en_msg)>=MAX_MSG_SIZE || (dropmsg && sendmsg < (int) (MSG_DROP_PROB * 100))) 			return 0;
 
 	em=(en_msg *)malloc(sizeof(en_msg) + size);
 	em->size=size;

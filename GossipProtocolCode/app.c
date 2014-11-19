@@ -23,7 +23,6 @@ int main(int argc, char *argv[]){
 
  int i,removed;
  srand (time(NULL));
- 
  if (argc < 1)
  {
 	printf("Config File Required\n");
@@ -59,7 +58,7 @@ int main(int argc, char *argv[]){
 		 if(getcurrtime() == (int)(STEP_RATE*i)) {
 			 /* introduce the ith node into the system at time STEPRATE*i */
 			 nodestart(&group[i], JOINADDR, PORTNUM); /* last two params not used here */
-		 	printf("%d-th introduced node is assigned with the address: ", i);
+		 	printf("%d-th introduced node is assigned with the address: \n", i);
 		 }
 		 else if(getcurrtime()>(int)(STEP_RATE*i) && group[i].bfailed==0) {
 			nodeloop(&group[i]);
